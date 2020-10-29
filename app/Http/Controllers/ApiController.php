@@ -70,7 +70,6 @@ class ApiController extends Controller
     }
 
     /**
-     * @param int $id Character ID
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -86,12 +85,12 @@ class ApiController extends Controller
             ]
         );
 
-        $data = $this->apiService->processOne('character', null, null, http_build_query($validator->validated()));
+        $data = $this->apiService->processOne('character', null, null, http_build_query($validator->valid()));
 
         return view('character.search', [
-                'name' => $validator->validated()['name'],
-                'species' => $validator->validated()['species'],
-                'type' => $validator->validated()['type'],
+                'name' => $validator->valid()['name'],
+                'species' => $validator->valid()['species'],
+                'type' => $validator->valid()['type'],
                 'title' => 'Character Search Results - Rick and Morty',
                 'count' => $data['data']['info']['count'] ?? null,
                 'results' => $data['data']['results'] ?? null
@@ -100,7 +99,6 @@ class ApiController extends Controller
     }
 
     /**
-     * @param int $id Character ID
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -117,9 +115,9 @@ class ApiController extends Controller
         $data = $this->apiService->processOne('location', null, null, http_build_query($validator->valid()));
 
         return view('location.search', [
-                'name' => $validator->validated()['name'],
-                'dimension' => $validator->validated()['dimension'],
-                'type' => $validator->validated()['type'],
+                'name' => $validator->valid()['name'],
+                'dimension' => $validator->valid()['dimension'],
+                'type' => $validator->valid()['type'],
                 'title' => 'Location Search Results - Rick and Morty',
                 'count' => $data['data']['info']['count'] ?? null,
                 'results' => $data['data']['results'] ?? null
@@ -128,7 +126,6 @@ class ApiController extends Controller
     }
 
     /**
-     * @param int $id Character ID
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -144,8 +141,8 @@ class ApiController extends Controller
         $data = $this->apiService->processOne('episode', null, null, http_build_query($validator->valid()));
 
         return view('episode.search', [
-                'name' => $validator->validated()['name'],
-                'episode' => $validator->validated()['episode'],
+                'name' => $validator->valid()['name'],
+                'episode' => $validator->valid()['episode'],
                 'title' => 'Episode Search Results - Rick and Morty',
                 'count' => $data['data']['info']['count'] ?? null,
                 'results' => $data['data']['results'] ?? null
